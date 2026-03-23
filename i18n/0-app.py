@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def main_page():
-    return render_template('index.html')
+    return render_template('0-index.html')
 
 if "__main__" == __name__:
     app.run(debug=True)
