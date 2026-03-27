@@ -2,7 +2,7 @@
 """
 THis file we use for create a simple Flask App
 """
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from flask_babel import Babel
 
 app = Flask(__name__)
@@ -21,12 +21,19 @@ class Config:
 app.config.from_object(Config)
 
 
+def get_locale():
+    return request.accept_languages.best_match(app.config['LANGUAGES'])
+
+
 @app.route('/')
 def main_page():
     """
     This route is main route, which show us the main page
     """
     return render_template('0-index.html')
+
+
+babel.init_app(app, locale_selector=get_locale())
 
 
 if "__main__" == __name__:
