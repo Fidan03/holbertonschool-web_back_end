@@ -5,9 +5,6 @@ THis file we use for create a simple Flask App
 from flask import Flask, render_template, request
 from flask_babel import Babel
 
-app = Flask(__name__)
-babel = Babel()
-
 
 class Config:
     """
@@ -18,6 +15,8 @@ class Config:
     BABEL_DEFAULT_TIMEZONE = "UTC"
 
 
+app = Flask(__name__)
+babel = Babel()
 app.config.from_object(Config)
 
 
@@ -40,4 +39,4 @@ def main_page():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000)
