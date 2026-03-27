@@ -12,7 +12,7 @@ class Config:
     """
     We use that class for create basic config parameters for our app
     """
-    languages = ["en", "fr"]
+    LANGUAGES = ["en", "fr"]
     BABEL_DEFAULT_LOCALE = "en"
     BABEL_DEFAULT_TIMEZONE = "UTC"
 
