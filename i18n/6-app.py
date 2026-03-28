@@ -54,6 +54,9 @@ def get_locale():
     if locale in app.config['LANGUAGES']:
         return locale
 
+    if flask.g.user and flask.g.get('locale') in app.config['LANGUAGES']:
+        return flask.g.user.get('locale')
+
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
