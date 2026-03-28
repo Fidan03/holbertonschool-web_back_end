@@ -23,12 +23,12 @@ users = {
 }
 
 
-def get_user(id):
-    if users[id]:
-        return users[id]
-    else:
+def get_user():
+    try:
+        user_id = request.args.get("login_as")
+        return users.get(int(user_id))
+    except (TypeError, ValueError):
         return None
-
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -36,8 +36,8 @@ babel = Babel()
 
 
 @app.before_request
-def before_request(id):
-    flask.g.user = get_user(id)
+def before_request():
+    flask.g.user = get_user()
 
 
 def get_locale():
