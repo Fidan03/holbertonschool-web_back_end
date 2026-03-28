@@ -6,6 +6,7 @@ import flask
 from flask import Flask, render_template, request
 from flask_babel import Babel
 
+
 class Config:
     """
     We use that class for create basic config parameters for our app
@@ -32,6 +33,7 @@ def get_user():
         return users.get(int(user_id))
     except (TypeError, ValueError):
         return None
+
 
 app = Flask(__name__)
 app.config.from_object(Config)
