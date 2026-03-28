@@ -24,6 +24,9 @@ users = {
 
 
 def get_user():
+    """
+    We use this documentation for getting user from the our DB
+    """
     try:
         user_id = request.args.get("login_as")
         return users.get(int(user_id))
@@ -37,6 +40,7 @@ babel = Babel()
 
 @app.before_request
 def before_request():
+    """We use that for add the func before request"""
     flask.g.user = get_user()
 
 
