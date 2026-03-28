@@ -14,7 +14,6 @@ class Config:
     BABEL_DEFAULT_LOCALE = "en"
     BABEL_DEFAULT_TIMEZONE = "UTC"
 
-
 app = Flask(__name__)
 app.config.from_object(Config)
 
@@ -25,9 +24,9 @@ def get_locale():
     """
     We use this function for getting the lang from browser
     """
-    lang = request.args.get('locale')
-    if lang:
-        return lang
+    locale = request.args.get('locale')
+    if locale in app.config['LANGUAGES']:
+        return locale
     else:
         return request.accept_languages.best_match(app.config['LANGUAGES'])
 
