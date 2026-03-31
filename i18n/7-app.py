@@ -3,8 +3,10 @@
 THis file we use for create a simple Flask App
 """
 import flask
+import pytz
 from flask import Flask, render_template, request
 from flask_babel import Babel
+from datetime import datetime
 
 
 class Config:
@@ -60,7 +62,31 @@ def get_locale():
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
-babel.init_app(app, locale_selector=get_locale)
+def get_timezone():
+    """
+    we use that function for getting a timezone from browser
+    """
+    timezone = request.args.get('timezone')
+
+    if timezone:
+        try:
+            pytz.timezone(timezone)
+            return timezone
+        except pytz.UnknownTimeZoneError:
+            pass
+
+    if flask.g.user:
+        try:
+            zone = flask.g.user.get('timezone')
+            pytz.timezone(zone)
+            return zone
+        except pytz.UnknownTimeZoneError:
+            pass
+
+    return app.config['BABEL_DEFAULT_TIMEZONE']
+
+
+babel.init_app(app, locale_selector=get_locale, timezone_selector=get_timezone)
 
 
 @app.route('/')
@@ -68,7 +94,7 @@ def main_page():
     """
     This route is main route, which show us the main page
     """
-    return render_template('6-index.html')
+    return render_template('7-index.html')
 
 
 if __name__ == "__main__":
