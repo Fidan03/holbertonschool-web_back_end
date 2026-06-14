@@ -4,6 +4,6 @@ from typing import Tuple
 
 
 def index_range(page: int, page_size: int) -> Tuple[int, int]:
-    """Return a tuple of start and end indexes for a given page and page size."""
+    """Return a tuple of (start_index, end_index) for the given page."""
     start = (page - 1) * page_size
     return (start, start + page_size)
